@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Create{% endblock %}
+{% block content %}
+<h1>Create</h1>
+    <p>Create page in progress</p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}        
+    <form action="{{ url_for('user_page.add') }}" method="post">
+        <p>Name:</p>
+        <p><input type="text" name="user_name" required /></p>        
+        <p>Password:</p>
+        <p><input type="text" name="password" required /></p>        
+        <button type="submit">Create</button>
+    </form>    
+{% endblock %}
