@@ -1,0 +1,17 @@
+body {
+    background-color: #2b2b2b;
+    color: green;
+    font-family: Arial, sans-serif;
+}
+
+#blackjack-table {
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: #006400;
+}
+
+.card {
+    font-size: 50px;
+}
