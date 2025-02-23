@@ -2,8 +2,7 @@
 {% block title %}Index{% endblock %}
 {% block content %}
 <h1 style="color: green;">Index</h1>
-    <p>Start page in progress</p>
-        <p>Welcome {{session["user"]}}!</p>
+    <h2>Welcome {{session["user"]}}!</h2>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for msg in messages %}
@@ -11,7 +10,9 @@
         {% endfor %}
     {% endif %}
 {% endwith %}
-<form action="{{ url_for('blackjack') }}" method="post">       
-    <button type="submit">Play</button>
-</form>
+<div class="text-center mt-4">
+    <form action="{{ url_for('blackjack') }}" method="post">       
+        <button class="btn btn-primary">Play Black Jack</button>
+    </form>
+</div>
 {% endblock %}

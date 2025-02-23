@@ -12,6 +12,7 @@ load_dotenv()
 app.secret_key=os.getenv("SECRET_KEY")
 app.permanent_session_lifetime = timedelta(minutes=5) # Sets how long session data is saved
 
+
 app.register_blueprint(login_bp, url_prefix="/login") # Activate my blueprints
 app.register_blueprint(user_page_bp, url_prefix="/user_page")
 app.register_blueprint(db_bp, url_prefix="/db")
@@ -41,6 +42,24 @@ def logout():
         session.pop("user", None) # Remove user from session when logged out   
         return redirect(url_for("login.login"))
 
+# Code from ChatGPT
+# Mappa kortens namn till Unicode-symboler
+CARD_UNICODE = {
+    "hearts": "♥️",
+    "diamonds": "♦️",
+    "clubs": "♣️",
+    "spades": "♠️"
+}
+
+def get_unicode_card(card):
+    """Konvertera kort till Unicode-symboler, t.ex. 'hearts 10' → '♥️10'"""
+    suit, value = card.split()  # Dela upp i färg och värde
+    return f"{CARD_UNICODE.get(suit, suit)}{value}"
+
+# Code from ChatGPT
+app.jinja_env.filters["unicode_card"] = get_unicode_card
+print(get_unicode_card("hearts 10"))  # Borde ge: ♥️10
+print(get_unicode_card("spades 5"))  # Borde ge: ♠️5
 
 if __name__ == "__main__":
     app.run(debug=True)
