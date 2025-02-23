@@ -1,4 +1,19 @@
 # Python_AI_Lab1_Flaskazure-common==1.1.28
+_____________________________________________________________________________________
+Set Up:
+Connectionstring for MongoDB and Secret Key for Sessions is stored in a .env file as 
+CONNECTION_STRING and SECRET_KEY 
+Start app from app.py
+_____________________________________________________________________________________
+How to play Black Jack:
+Log in or create new user, then go to Home on navbar and hit 'Play Black Jack'
+You are dealt two cards and the computer is dealt one
+The goal is to get closest to without going over 21
+To draw a card hit 'Hit' and when you're happy with your hand hit 'Stand'
+Then the computer will draw its hand and the result will be shown
+To reset the game go back to Home and click 'Play Black Jack' again
+_____________________________________________________________________________________
+REQUIREMENTS:
 azure-core==1.32.0
 azure-identity==1.19.0
 azure-keyvault-secrets==4.9.0
