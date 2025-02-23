@@ -11,4 +11,7 @@
         {% endfor %}
     {% endif %}
 {% endwith %}
+<form action="{{ url_for('blackjack') }}" method="post">       
+    <button type="submit">Play</button>
+</form>
 {% endblock %}
