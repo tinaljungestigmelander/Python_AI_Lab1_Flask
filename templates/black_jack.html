@@ -1,104 +1,46 @@
 {% extends "base.html" %}
 
-{% block title %}Blackjack - Spela{% endblock %}
+{% block title %}Blackjack{% endblock %}
 
 {% block content %}
 <div class="text-center">
     <h1>Blackjack</h1>
+    
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for msg in messages %}
-        <p>{{msg}}</p>
+        <p class="alert alert-info">{{msg}}</p>
         {% endfor %}
     {% endif %}
     {% endwith %}
-    <div id="game-board" class="mt-4">
-        <h2>Din hand:</h2>
-        
-        {% for c in session["player_hand"]%}
-        <p>{{c}}</p>
-        {% endfor %}
-        
-        <p>Poäng: <span id="player_score">{{session["player_score"]}}</span></p>
 
-        <h2>Dealerns hand:</h2>
-        <p id="dealer_hand">
-            {% for c in session["computer_hand"]%}
-            <p>{{c}}</p>
+    <div id="game-board" class="mt-4">
+        <h2>Player Hand:</h2>
+        <div id="player-hand">
+            {% for card in session["player_hand"] %}
+                <span class="card-symbol">{{ card | unicode_card }}</span>
             {% endfor %}
-        </p>
-        <p>Poäng: <span id="computer_score">{{session["computer_score"]}}</span></p>
+        </div>
+        <p>Score: <span id="player_score">{{session["player_score"]}}</span></p>
+
+        <h2>Computer Hand:</h2>
+        <div id="dealer-hand">
+            {% for card in session["computer_hand"] %}
+                <span class="card-symbol">{{ card | unicode_card }}</span>
+            {% endfor %}
+        </div>
+        <p>Score: <span id="computer_score">{{session["computer_score"]}}</span></p>
 
         <h3 id="result-message"></h3>
+        
+        <div class="button-container">
+            <form action="{{ url_for('black_jack.add_card') }}" method="post">       
+                <button class="btn btn-primary btn-lg" type="submit">Hit</button>
+            </form>
+            <form action="{{ url_for('black_jack.computer_move') }}" method="post">       
+                <button class="btn btn-danger btn-lg" type="submit">Stand</button>
+            </form>
+        </div>
     </div>
-    <div class="d-flex gap-2">
-        <form action="{{ url_for('black_jack.add_card') }}" method="post">       
-            <button class="btn btn-primary" type="submit">Hit</button>
-        </form>
-        <form action="{{ url_for('black_jack.computer_move') }}" method="post">       
-            <button class="btn btn-danger" type="submit">Stand</button>
-        </form>
-
-
-<!-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        fetchGameState();
-    });
-
-    function fetchGameState() {
-        fetch("/black_jack/play_black_jack")
-        .then(response => response.text())
-        .then(html => document.body.innerHTML = html);
-    }
-
-    function hit() {
-        fetch("{{ url_for('black_jack.add_card') }}", { method: "POST" })
-        .then(response => response.json())
-        .then(data => {
-            console.log("DEBUG: Uppdaterad hand:", data.player_hand);
-
-            let handDiv = document.getElementById("player-hand");
-            handDiv.innerHTML = "";  // Rensa gamla kort
-            data.player_hand.forEach(card => {
-                let cardElement = document.createElement("span");
-                cardElement.innerText = card + " "; 
-                handDiv.appendChild(cardElement);
-            });
-            document.getElementById("player-score").innerText = "Score: " + data.player_score;
-
-// Kolla om spelaren blivit tjock (över 21)
-            if (data.player_score > 21) {
-                document.getElementById("result").innerText = "Du blev tjock! Dealern vinner!";
-                disableButtons();
-            }
-        })
-    .catch(error => console.error("❌ ERROR:", error));
-    }
-        // .then(data => {
-        //     document.getElementById(session["player_hand"]).innerText = data.player_hand.join(" ");
-        //     document.getElementById("player_score").innerText = data.score;
-
-        //     if (data.score > 21) {
-        //         document.getElementById("result").innerText = "Du blev tjock! Dealern vinner!";
-        //         disableButtons();
-        //     }
-        // });
-    
-
-    function stand() {
-        fetch("/stand", { method: "POST" })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("computer_hand").innerText = data.dealer_hand.join(" ");
-            document.getElementById("computer_score").innerText = data.dealer_score;
-            document.getElementById("result").innerText = data.result;
-            disableButtons();
-        });
-    }
-
-    function disableButtons() {
-        document.querySelectorAll("button").forEach(btn => btn.disabled = true);
-    }
-</script> -->
-
+</div>
 {% endblock %}

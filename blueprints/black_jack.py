@@ -22,14 +22,14 @@ def play_black_jack():
 #Build deck
 def build_deck():
     #Create a list with all cards in the deck
-    deck=[f"Hearts {i}" for i in range(2,11)] +\
-         ["Hearts knight","Hearts queen","Hearts king","Hearts ace"] +\
-         [f"Diamonds {i}" for i in range(2,11)] +\
-         ["Diamonds knight","Diamonds queen","Diamonds king","Diamonds ace"] +\
-         [f"Clubs {i}" for i in range(2,11)] +\
-         ["Clubs knight","Clubs queen","Clubs king","Clubs ace"] +\
-         [f"Spades {i}" for i in range(2,11)] +\
-         ["Spades knight","Spades queen","Spades king","Spades ace"]
+    deck=[f"hearts {i}" for i in range(2,11)] +\
+         ["hearts knight","hearts queen","hearts king","hearts ace"] +\
+         [f"diamonds {i}" for i in range(2,11)] +\
+         ["diamonds knight","diamonds queen","diamonds king","diamonds ace"] +\
+         [f"clubs {i}" for i in range(2,11)] +\
+         ["clubs knight","clubs queen","clubs king","clubs ace"] +\
+         [f"spades {i}" for i in range(2,11)] +\
+         ["spades knight","spades queen","spades king","spades ace"]
     # Shuffle the deck 
     random.shuffle(deck) 
     return deck
@@ -108,6 +108,8 @@ def check_score():
         elif player_sum<computer_sum:
             flash("Computer wins!")
     return redirect(url_for("home"))
+
+
 
 
  
