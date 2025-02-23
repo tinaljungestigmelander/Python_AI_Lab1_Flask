@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+{% block content %}
+<h1>{{user_name}}</h1>
+    <p>User page in progress</p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+            <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <p>Name: {{user_name}}</p>
+    <p>Password: {{password}}</p>
+    <form action="{{ url_for('user_page.update') }}" method="post">        
+        <p>New Password:</p>
+        <p><input type="text" name="password" required /></p>        
+        <button type="submit">Update Password</button>
+    </form>
+    <br> 
+    <form action="{{ url_for('user_page.delete') }}" method="post">       
+        <button type="submit">Delete Account</button>
+    </form>  
+{% endblock %}
